@@ -1,65 +1,53 @@
-import Image from "next/image";
+import type { Metadata } from 'next';
+import Simulateur from '@/components/Simulateur';
+
+export const metadata: Metadata = {
+  title: 'Simulateur Charges Auto-Entrepreneur 2026 — Calcul URSSAF Gratuit',
+  description:
+    "Calculez vos charges URSSAF, votre revenu net et votre provision impôt en tant qu'auto-entrepreneur en 2026. Taux officiels mis à jour avec le décret n°2026-69 (ACRE). Gratuit, sans inscription.",
+  alternates: { canonical: 'https://simautoentrepreneur.fr' },
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="flex-1 bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+      <div className="max-w-6xl mx-auto px-4 py-10">
+        {/* Hero */}
+        <div className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            Simulateur de charges auto-entrepreneur 2026
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-gray-500 max-w-2xl mx-auto text-base">
+            Taux URSSAF officiels 2026 · Décret ACRE n°2026-69 · Barème IR 2026 · Résultats instantanés
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        <Simulateur />
+
+        {/* Pages métiers */}
+        <section className="mt-16">
+          <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">
+            Simulateurs par métier
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            {[
+              { href: '/simulateur/developpeur-freelance',  label: '💻 Développeur freelance' },
+              { href: '/simulateur/graphiste-freelance',    label: '🎨 Graphiste freelance' },
+              { href: '/simulateur/consultant-independant', label: '📊 Consultant indépendant' },
+              { href: '/simulateur/plombier-artisan',       label: '🔧 Plombier / artisan BTP' },
+              { href: '/simulateur/photographe-freelance',  label: '📷 Photographe freelance' },
+            ].map((m) => (
+              <a
+                key={m.href}
+                href={m.href}
+                className="bg-white border border-gray-100 rounded-xl p-3 text-center text-sm text-gray-700 hover:border-blue-200 hover:shadow-sm transition-all"
+              >
+                {m.label}
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
